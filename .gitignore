@@ -1,0 +1,54 @@
+# ============================
+# Visual Studio Build & Temp Files
+# ============================
+
+# The main culprit: The hidden .vs folder (contains ipch, databases, etc.)
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Rr]elease/
+[Dd]ebug/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+
+# Specific binary/temp extensions
+*.exe
+*.dll
+*.pdb
+*.idb
+*.ipdb
+*.iobj
+*.ilk
+*.log
+*.tlog
+*.cache
+*.sdf
+*.opensdf
+*.ipch
+
+# ============================
+# User-specific files (Environment settings)
+# ============================
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vstoken
+
+# ============================
+# OS-generated files
+# ============================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ============================
+# Project specific (Optional)
+# ============================
+# Common for C++ projects to ignore the filters file if you want 
+# VS to manage them locally only
+*.filters
