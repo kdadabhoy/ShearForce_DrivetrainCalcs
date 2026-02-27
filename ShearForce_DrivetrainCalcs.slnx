@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="ShearForce_DrivetrainCalcs/ShearForce_DrivetrainCalcs.vcxproj" />
+  <Project Path="ShearForce_DrivetrainCalcs/ShearForce_DrivetrainCalcs.vcxproj" Id="8cff327e-43b7-4b31-a417-d6addf67df21" />
 </Solution>
