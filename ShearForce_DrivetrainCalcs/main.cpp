@@ -24,6 +24,9 @@ using namespace std;
 
 int main()
 {
+	const double inches_to_meters = 0.0254;
+	const double PI = 3.1415;
+
 	// --- 1. Physical Constants & Inputs ---
 	const double dt = 0.002;
 	const double total_weight_lb = 30.0;
@@ -41,8 +44,8 @@ int main()
 	const double G_box = 19.0;				// Gearbox reduction
 
 	// Wheel Radii
-	const double r_f = 2.5 / 2 * 0.0254;    // Front Wheel Radius
-	const double r_b = 3.5 / 2 * 0.0254;    // Rear Wheel Radius 
+	const double r_f = (2.5 / 2) * inches_to_meters;    // Front Wheel Radius
+	const double r_b = (3.5 / 2) * inches_to_meters;    // Rear Wheel Radius 
 
 
 	// Pulley Teeth
@@ -75,24 +78,23 @@ int main()
 
 	// --- 3. Motor Specs (BadAss 3515-1130kv) ---
 	const double speed_factor = .85;		// Accounting for air resistance/losses
-	const double v_batt = 22.2;
-	const double kv = 1130.0;
-	const double kt = 9.549296 / kv;
+	const double v_batt = 22.2;				// Volts
+	const double kv = 1400;					// rpm/V
+	const double kt = 60 / (2*PI*kv);		// N*m/Amps		
 	const double efficiency = 0.80;			// Drivetrain efficiency
-	const double current_limit = 80.0;
+	const double current_limit = 80.0;		// Amps
 
-	const double omega_no_load = (kv * v_batt * speed_factor) * (2.0 * 3.1415 / 60.0);
-	const double torque_stall = current_limit * kt * efficiency;
+	const double omega_no_load = (kv * v_batt * speed_factor) * (2.0 * PI / 60.0); // rad/s
+	const double torque_stall = current_limit * kt * efficiency;	//Nm 
 
 
 	// --- 4. Traction & Inertia Derivations ---
 	// Combined Traction: T_limit_total = mu*(Nf + Nr) * K_sys = mu*Mass_per_side*K_sys
-	double Traction_Limit = mu * weight_n_side * K_sys;
+	double Traction_Limit = mu * weight_n_side * K_sys;	// N*m
 
 
 	// Equivalent Inertia (Reflected Mass): Inertia_eq = m*K_sys^2 + I_fp / Rf^2 + I_bp / Rb^2 + I_m
-	double Inertia_eq = mass_kg_side * std::pow(K_sys, 2); // ignores pulley inertias and motor inertia for now
-
+	double Inertia_eq = mass_kg_side * pow(K_sys, 2); // ignores pulley inertias and motor inertia for now
 
 
 
@@ -112,8 +114,9 @@ int main()
 		double torque_m = min(max(torque_pot, 0.0), Traction_Limit);
 
 		// Acceleration calcs
+		double current_accel_mps2 = (torque_m * K_sys) / Inertia_eq;
 		double alpha_m = torque_m / Inertia_eq;
-		double current_accel_mps2 = alpha_m * K_sys;
+
 
 		// Time-step integration
 		omega_m += alpha_m * dt;
