@@ -62,12 +62,12 @@ int main()
 	const double R_b = Rear_Pulley_Teeth / Motor_Pulley_Teeth_Back;   // Teeth Back Pulley / Teeth Motor Pulley (for back)
 	
 	// Check to make sure r_f / R_f = r_b / R_b
-	if ((r_f / R_f) != (r_b / R_b))
+	if (abs((r_f / R_f) - (r_b / R_b)) > .001)
 	{
 		cout << "Pulley ratios do not work!" << endl;
 		cout << (r_f / R_f) << " " << (r_b / R_b) << endl;
 		cout << endl << endl;
-		//assert((r_f / R_f) == (r_b / R_b));
+		assert(abs((r_f / R_f) - (r_b / R_b)) > .001);
 	}
 
 
