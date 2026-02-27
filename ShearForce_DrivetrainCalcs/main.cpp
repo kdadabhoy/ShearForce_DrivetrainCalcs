@@ -1,15 +1,6 @@
 /*
-	This code was AI generated based on the derivations I provided it.
-	I might go back and look at it later / fix it.
 
-	But yeah :)
-
-	I do not believe it accounts for inertias the same way I was
-	accounting for them in my derivation... so that'll prob need to be fixed at
-	some point... 
-
-
-	TLDR: Simulation tab on that excel sheet is good enough imo
+	I rewrote this code. This accurately describes my new derivations
 	
 */
 
