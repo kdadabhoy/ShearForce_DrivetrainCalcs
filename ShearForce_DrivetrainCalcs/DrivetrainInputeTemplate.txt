@@ -1,0 +1,48 @@
+*** Do not edit this template besides the numbers ***
+*** It is very important that there is only 1 space between : and the number ***
+*** This file must be put in the same folder as the script ***
+
+Developed by Kaden Dadabhoy :)
+
+----------------------------------
+Simulation Parameters:
+----------------------------------
+TotalSimulationTime (s): 5.0
+TimeStep (s): 0.02
+
+
+----------------------------------
+MA / Speed Ratios / Pulley Ratios 
+/ Wheel Sizes:
+----------------------------------
+Gearbox Reduction: 19
+
+Front Wheel Diameter (in): 2.5
+Front Pulley Teeth: 20.0
+Motor Pulley Corresponding to Front Pulley Teeth: 30.0
+
+Rear Wheel Diameter (in): 3.5
+Rear Pulley Teeth: 28.0
+Motor Pulley Corresponding to Rear Pulley Teeth: 30.0
+
+
+----------------------------------
+Efficiency Factors:
+----------------------------------
+Speed_Factor: 0.85
+Drivetrain_Efficiency: 0.80
+
+
+----------------------------------
+Battery Properties:
+----------------------------------
+Kv (rpm/Volt): 1400
+Current Limit (Amps): 80.0
+Battery Voltage (V): 22.2
+
+
+----------------------------------
+Constants / Other:
+----------------------------------
+Coefficient of Friction: 1.0
+Total Weight (lb): 30.0
