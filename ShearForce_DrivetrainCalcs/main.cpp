@@ -62,9 +62,9 @@ int main()
 		cout << "=========================================================" << endl;
 		cout << "Current Folder: " << fs::current_path().string() << endl;
 
-		cout << "\nStep 1: Enter Input Filename (Default: DrivetrainInputeTemplate.txt): ";
+		cout << "\nStep 1: Enter Input Filename (Default: DrivetrainInputTemplate.txt): ";
 		getline(cin, fileName);
-		if (fileName.empty()) fileName = "DrivetrainInputeTemplate.txt";
+		if (fileName.empty()) fileName = "DrivetrainInputTemplate.txt";
 		fileName.erase(remove(fileName.begin(), fileName.end(), '\"'), fileName.end());
 
 		ifstream file(fileName);
