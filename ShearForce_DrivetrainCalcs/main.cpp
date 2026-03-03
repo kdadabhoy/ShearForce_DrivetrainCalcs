@@ -142,6 +142,13 @@ void Simulate(const Config& cfg, string csvName)
 	double Traction_Limit = cfg.mu * weight_n_side * K_sys;
 	double Inertia_eq = mass_kg_side * pow(K_sys, 2);
 
+
+
+	// Front and Rear System Ratios (Linear Meters per Motor Radian)
+	double K_sys_front = r_f / (cfg.gearboxReduction * R_f);
+	double K_sys_rear = r_b / (cfg.gearboxReduction * R_b);
+
+
 	ofstream csvFile;
 	if (!csvName.empty())
 	{
@@ -202,6 +209,21 @@ void Simulate(const Config& cfg, string csvName)
 		vel_m_s = omega_m * K_sys;
 		time += cfg.dt;
 	}
+
+
+
+	// V=V Check: Linear velocity must match for a synced drivetrain
+	if (abs(K_sys_front - K_sys_rear) > 0.0001)
+	{
+		cout << fixed << setprecision(5); // High precision for internal constants
+		cout << "\n[!] CRITICAL WARNING: VELOCITY MISMATCH!" << endl;
+		cout << "Front Wheel Speed and Rear Wheel Speed are NOT synced." << endl;
+		cout << "Front K_sys: " << K_sys_front << " m/rad" << endl;
+		cout << "Rear K_sys:  " << K_sys_rear << " m/rad" << endl;
+		cout << "The robot will 'fight' itself. Using Front specs for simulation.\n" << endl;
+	}
+
+
 
 	if (csvFile.is_open())
 	{
