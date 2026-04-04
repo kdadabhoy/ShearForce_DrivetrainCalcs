@@ -191,18 +191,17 @@ void Simulate(const Config& cfg, string csvName)
 		double current_accel_mps2 = (torque_m * K_sys) / fmax(Inertia_eq, 0.00001);
 		double alpha_m = torque_m / fmax(Inertia_eq, 0.00001);
 
-		if (fmod(time + 0.00001, 0.1) < cfg.dt)
+		// Removed the fmod check so that every time step outputs to console and CSV
+		string status = (torque_m >= Traction_Limit - 0.01) ? "LIMIT" : "MOTOR";
+
+		// Console output for quick check
+		// Increased setprecision for time to see small dt changes (e.g., 0.001)
+		cout << fixed << setprecision(4) << time << " | " << vel_m_s * 2.237 << " | " << current_accel_mps2 / g << " | " << status << endl;
+
+		// CSV output
+		if (csvFile.is_open())
 		{
-			string status = (torque_m >= Traction_Limit - 0.01) ? "LIMIT" : "MOTOR";
-
-			// Console output for quick check
-			cout << fixed << setprecision(2) << time << " | " << vel_m_s * 2.237 << " | " << current_accel_mps2 / g << " | " << status << endl;
-
-			// CSV output
-			if (csvFile.is_open())
-			{
-				csvFile << time << "," << vel_m_s * 2.237 << "," << current_accel_mps2 / g << "," << (torque_m / K_sys) << "," << torque_m << "," << status << "\n";
-			}
+			csvFile << time << "," << vel_m_s * 2.237 << "," << current_accel_mps2 / g << "," << (torque_m / K_sys) << "," << torque_m << "," << status << "\n";
 		}
 
 		omega_m += alpha_m * cfg.dt;
